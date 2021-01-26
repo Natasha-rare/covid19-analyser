@@ -212,7 +212,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../../Downloads/virus 1.png</pixmap>
+          <pixmap>images/virus 1.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -252,7 +252,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../../Downloads/undraw_No_data_re_kwbl 1.png</pixmap>
+         <pixmap>images/undraw_No_data_re_kwbl 1.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -417,7 +417,7 @@ color: #fff;</string>
      <x>0</x>
      <y>0</y>
      <width>503</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
