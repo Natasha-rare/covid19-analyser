@@ -122,7 +122,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="homeBtn">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -309,7 +309,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="loadBtn">
     <property name="geometry">
      <rect>
       <x>350</x>
@@ -400,7 +400,7 @@ border-radius: 20
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="recentBtn">
     <property name="geometry">
      <rect>
       <x>350</x>
