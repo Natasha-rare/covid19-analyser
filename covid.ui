@@ -12,14 +12,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>422</height>
+    <width>653</width>
+    <height>406</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
-    <height>0</height>
+    <width>653</width>
+    <height>406</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>653</width>
+    <height>406</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -29,394 +35,428 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="spacing">
-     <number>3</number>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>150</width>
+      <height>361</height>
+     </rect>
     </property>
-    <property name="leftMargin">
-     <number>0</number>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
-    <property name="topMargin">
-     <number>0</number>
+    <property name="minimumSize">
+     <size>
+      <width>150</width>
+      <height>361</height>
+     </size>
     </property>
-    <property name="rightMargin">
-     <number>0</number>
+    <property name="contextMenuPolicy">
+     <enum>Qt::NoContextMenu</enum>
     </property>
-    <property name="bottomMargin">
-     <number>0</number>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
-    <item>
-     <widget class="QWidget" name="widget" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>150</width>
-        <height>361</height>
-       </size>
-      </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::NoContextMenu</enum>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(0, 85, 255)</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="sizeConstraint">
-        <enum>QLayout::SetMinimumSize</enum>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>51</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>18</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-           <strikeout>false</strikeout>
-           <stylestrategy>PreferAntialias</stylestrategy>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="acceptDrops">
-          <bool>true</bool>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255)</string>
-         </property>
-         <property name="text">
-          <string>COVID-19 Analyzer</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::PlainText</enum>
-         </property>
-         <property name="scaledContents">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="minimumSize">
-          <size>
-           <width>75</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: #fff;</string>
-         </property>
-         <property name="text">
-          <string>Home</string>
-         </property>
-         <property name="autoDefault">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="minimumSize">
-          <size>
-           <width>75</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: #fff;</string>
-         </property>
-         <property name="text">
-          <string>Settings</string>
-         </property>
-         <property name="autoDefault">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="maximumSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap>images/virus 1.png</pixmap>
-         </property>
-         <property name="scaledContents">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>7</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="label_5">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>2</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>111</width>
-          <height>108</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>images/undraw_No_data_re_kwbl 1.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>41</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(119, 119, 119)</string>
-        </property>
-        <property name="text">
-         <string>*We support PNG, JPG, JPEG and NIFTI file types</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>181</width>
-          <height>41</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>You don’t have any opened files</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>151</width>
-          <height>41</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(0, 85, 255);
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 85, 255)</string>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>121</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>121</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>18</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <strikeout>false</strikeout>
+       <stylestrategy>PreferAntialias</stylestrategy>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="acceptDrops">
+      <bool>true</bool>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255)</string>
+     </property>
+     <property name="text">
+      <string>COVID-19 Analyzer</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #fff;</string>
+     </property>
+     <property name="text">
+      <string>Home</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #fff;</string>
+     </property>
+     <property name="text">
+      <string>Settings</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>300</y>
+       <width>50</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>images/virus 1.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>153</x>
+      <y>0</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>428</x>
+      <y>0</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>238</x>
+      <y>116</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>310</y>
+      <width>180</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(119, 119, 119)</string>
+    </property>
+    <property name="text">
+     <string>*We support PNG, JPG, JPEG and NIFTI file types</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>220</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>151</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 85, 255);
 color: #fff;</string>
-        </property>
-        <property name="text">
-         <string>Load files*</string>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>151</width>
-          <height>21</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <underline>true</underline>
-         </font>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: none;</string>
-        </property>
-        <property name="text">
-         <string>or open recent</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
+    </property>
+    <property name="text">
+     <string>Load files*</string>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>130</y>
+      <width>191</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>181</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>18</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>You don’t have any opened files</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>270</y>
+      <width>151</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>151</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: none;</string>
+    </property>
+    <property name="text">
+     <string>or open recent</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>10</y>
+      <width>111</width>
+      <height>108</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>2</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>111</width>
+      <height>108</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/undraw_No_data_re_kwbl 1.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>503</width>
+     <width>653</width>
      <height>24</height>
     </rect>
    </property>
