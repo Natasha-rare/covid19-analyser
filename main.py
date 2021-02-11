@@ -20,7 +20,7 @@ class MyWidget(QMainWindow):
         self.model = torch.hub.load('ultralytics/yolov5', 'custom', path_or_model=f'{os.getcwd()}/best.pt')
 
     def home(self):
-        uic.load('covid.ui', self)
+        uic.loadUi('covid.ui', self)
 
     def settings(self):
         pass
@@ -33,7 +33,6 @@ class MyWidget(QMainWindow):
             filenames = dialog.selectedFiles()
         # TODO: check file type. If it is NIFTI, convert to PNG
         self.analyze(filenames)
-        self.move_results_to_folder()
 
     def analyze(self, images):
         imgs = []
@@ -41,17 +40,10 @@ class MyWidget(QMainWindow):
             imgs.append(Image.open(img))
         # TODO resize image if > 256x256
         results = self.model(imgs, size=256)
-        print(f'RESULTS:\n {results.print()}')
-        results.save()
-
-    def move_results_to_folder(self):
-        # это временное решение, я спросил у создателя нейронки, можно ли сохранять через results.save() в папку
+        results.print()
         if not os.path.exists('results'):
             os.mkdir('results')
-        for file in os.listdir():
-            if 'results' in file and 'jpg' in file:
-                os.rename(f'{os.getcwd()}/{file}', f'{os.getcwd()}/results/{file}')
-        print('Done moving')
+        results.save(save_dir='results')
 
 
 app = QApplication(sys.argv)
