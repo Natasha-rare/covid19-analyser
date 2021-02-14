@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -290,30 +293,7 @@
      <string>❌ End session</string>
     </property>
    </widget>
-   <widget class="QScrollArea" name="srollResults">
-    <property name="geometry">
-     <rect>
-      <x>189</x>
-      <y>69</y>
-      <width>341</width>
-      <height>481</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>339</width>
-       <height>479</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -372,6 +352,16 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QListWidget" name="srollResults">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>90</y>
+      <width>351</width>
+      <height>451</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -1,7 +1,8 @@
 import sys
 from PyQt5 import uic
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QPixmap, QImage, QIcon
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem
 from PIL import Image
 import shutil
 import os
@@ -71,12 +72,24 @@ class MyWidget(QMainWindow):
         main.show()
         print('opened')
         # self.close()
-
         for im in images:
-            imageLabel = QLabel()
-            imageLabel.setPixmap(QPixmap.fromImage(QImage(im)))
-            is_ill = self.illness_check(im)
-            main.srollResults.setWidget(imageLabel)
+            icon = QIcon(im)
+            text = ""
+            if self.illness_check(im):
+                text = "Is ill"
+            else:
+                text = "is not ill"
+            item = QListWidgetItem(icon, text)
+            size = QSize()
+            # size.setHeight(500)
+            # size.setWidth(500)
+            # item.setSizeHint(size)
+            # imageLabel = QLabel()
+            # imageLabel.setPixmap(QPixmap.fromImage(QImage(im)))
+            # is_ill = self.illness_check(im)
+            main.srollResults.addItem(item)
+        if os.path.exists('results'):
+            os.rmdir('results')
 
 
 app = QApplication(sys.argv)
