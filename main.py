@@ -25,7 +25,7 @@ class MyWidget(QMainWindow):
         self.homeBtn.clicked.connect(self.home)
         # self.settingsBtn.clicked.connect(self.settings)
         self.model = torch.hub.load('ultralytics/yolov5', 'custom',
-                path_or_model=f'{os.getcwd()}/best.pt')
+                                    path_or_model=f'{os.getcwd()}/best.pt')
 
     def home(self):
         uic.loadUi('covid.ui', self)
@@ -41,6 +41,7 @@ class MyWidget(QMainWindow):
             filenames = dialog.selectedFiles()
         # TODO: check file type. If it is NIFTI, convert to PNG
         self.analyze(filenames)
+        self.openResults(filenames)
 
     def analyze(self, filenames):
         images = []
@@ -51,10 +52,9 @@ class MyWidget(QMainWindow):
         if not os.path.exists('results'):
             os.mkdir('results')
         results.save()
-        self.openResults(filenames)
 
     def illness_check(self, image_path):
-        img = cv2.imread(f'{os.getcwd()}/results/{image_path}')
+        img = cv2.imread(image_path)
         if len(img.shape) < 3:
             return False
         if img.shape[2] == 1:
@@ -75,8 +75,8 @@ class MyWidget(QMainWindow):
             imageLabel.setPixmap(QPixmap.fromImage(QImage(im)))
             is_ill = self.illness_check(im)
             main.srollResults.setWidget(imageLabel)
-            
-            
+
+
 app = QApplication(sys.argv)
 ex = MyWidget()
 ex.show()
