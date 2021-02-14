@@ -66,6 +66,8 @@ class MyWidget(QMainWindow):
 
     def openResults(self, images):
         main = uic.loadUi('mainPage.ui', self)
+        self.setMinimumSize(0, 0)
+        self.setMaximumSize(16777215, 16777215)
         main.show()
         print('opened')
         # self.close()
