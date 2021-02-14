@@ -75,7 +75,8 @@ class MyWidget(QMainWindow):
             imageLabel.setPixmap(QPixmap.fromImage(QImage(im)))
             is_ill = self.illness_check(im)
             main.srollResults.setWidget(imageLabel)
-
+            
+            
 app = QApplication(sys.argv)
 ex = MyWidget()
 ex.show()
