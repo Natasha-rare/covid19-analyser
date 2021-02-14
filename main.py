@@ -41,7 +41,7 @@ class MyWidget(QMainWindow):
             filenames = dialog.selectedFiles()
         # TODO: check file type. If it is NIFTI, convert to PNG
         self.analyze(filenames)
-        self.openResults(filenames)
+        self.openResults(os.listdir('results'))
 
     def analyze(self, filenames):
         images = []
@@ -54,7 +54,7 @@ class MyWidget(QMainWindow):
         results.save()
 
     def illness_check(self, image_path):
-        img = cv2.imread(image_path)
+        img = cv2.imread(f'{os.getcwd()}/results/{image_path}')
         if len(img.shape) < 3:
             return False
         if img.shape[2] == 1:
@@ -74,8 +74,9 @@ class MyWidget(QMainWindow):
 
         for im in images:
             imageLabel = QLabel()
-            imageLabel.setPixmap(QPixmap.fromImage(QImage(im)))
+            imageLabel.setPixmap(QPixmap.fromImage(QImage(f'{os.getcwd()}/results/{im}')))
             is_ill = self.illness_check(im)
+            print(is_ill)
             main.srollResults.setWidget(imageLabel)
 
 
