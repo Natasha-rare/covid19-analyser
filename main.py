@@ -38,7 +38,7 @@ class MyWidget(QMainWindow):
         imgs = []
         for img in images:
             imgs.append(Image.open(img))
-        # TODO resize image if > 256x256
+        # TODO resize image if > 256x256 - DONE by Vakshin Aleksandr
         results = self.model(imgs, size=256)
         results.print()
         if not os.path.exists('results'):
