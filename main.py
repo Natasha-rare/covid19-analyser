@@ -74,15 +74,18 @@ class MyWidget(QMainWindow):
         # self.close()
         for im in images:
             im_path = f'{os.getcwd()}/results/{im}'
-            icon = QIcon(im_path)
+            image = QPixmap(im_path)
+            icon = QIcon(image.scaled(256, 256))
             text = ""
             if self.illness_check(im):
                 text = "Is ill"
             else:
                 text = "is not ill"
             item = QListWidgetItem(icon, text)
-            # size.setHeight(500)
-            # size.setWidth(500)
+            item.sizeHint()
+            # size = QSize()
+            # size.setHeight(256)
+            # size.setWidth(100)
             # item.setSizeHint(size)
             # imageLabel = QLabel()
             # imageLabel.setPixmap(QPixmap.fromImage(QImage(im)))
