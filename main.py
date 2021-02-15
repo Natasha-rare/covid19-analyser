@@ -10,32 +10,12 @@ import torch
 import requests, cv2, tqdm, torchvision, yaml, matplotlib, pandas, seaborn
 
 
-class MyWidget(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi('covid.ui', self)
-        # self.setFixedSize(1006, 807)
-        self.loadBtn.clicked.connect(self.load)
-        self.homeBtn.clicked.connect(self.home)
-        # self.settingsBtn.clicked.connect(self.settings)
-
-    def home(self):
-        widget = MyWidget()
-        widget.show()
-
-    def settings(self):
-        pass
-
-    def load(self):
-        dialog = QFileDialog()
-        dialog.setFileMode(QFileDialog.ExistingFiles)
-        filenames = []
-        if dialog.exec_():
-            filenames = dialog.selectedFiles()
-        if len(filenames) != 0:
-            # TODO: check file type. If it is NIFTI, convert to PNG
-            self.analyze(filenames)
-            self.openResults(os.listdir('results'))
+class MainWindow(QMainWindow):
+    def __init__(self, filenames=None, parent=None):
+        super().__init__(parent)
+        uic.loadUi('mainPage.ui', self)
+        self.analyze(filenames)
+        self.openResults(os.listdir('results'))
 
     def analyze(self, filenames):
         print('LOADING MODEL:')
@@ -62,11 +42,6 @@ class MyWidget(QMainWindow):
         return True  # if not grayscale
 
     def openResults(self, images):
-        main = uic.loadUi('mainPage.ui', self)
-        self.setMinimumSize(0, 0)
-        self.setMaximumSize(16777215, 16777215)
-        main.homeButton.clicked.connect(self.home)
-        main.show()
 
         for im in images:
             im_path = f'{os.getcwd()}/results/{im}'
@@ -87,8 +62,39 @@ class MyWidget(QMainWindow):
             item.setText(text)
             item.setFont(font)
 
-            main.scrollResults.addItem(item)
-            main.scrollResults.setIconSize(QSize(200, 200))
+            self.scrollResults.addItem(item)
+            self.scrollResults.setIconSize(QSize(200, 200))
+
+
+class MyWidget(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('covid.ui', self)
+        # self.setFixedSize(1006, 807)
+        self.loadBtn.clicked.connect(self.load)
+        self.homeBtn.clicked.connect(self.home)
+        # self.settingsBtn.clicked.connect(self.settings)
+
+    def settings(self):
+        pass
+
+    def home(self):
+        print("HOME")
+        ex = MyWidget()
+        ex.show()
+
+    def load(self):
+        dialog = QFileDialog()
+        dialog.setFileMode(QFileDialog.ExistingFiles)
+        filenames = []
+        if dialog.exec_():
+            filenames = dialog.selectedFiles()
+        if len(filenames) != 0:
+            # TODO: check file type. If it is NIFTI, convert to PNG
+            self.setMinimumSize(0, 0)
+            self.setMaximumSize(16777215, 16777215)
+            m = MainWindow(filenames=filenames, parent=self)
+            m.show()
 
 
 try:
