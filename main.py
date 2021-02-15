@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import uic
 from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QPixmap, QImage, QIcon
+from PyQt5.QtGui import QPixmap, QImage, QIcon, QFont
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem
 from PIL import Image
 import shutil
@@ -10,26 +10,18 @@ import torch
 import requests, cv2, tqdm, torchvision, yaml, matplotlib, pandas, seaborn
 
 
-class CreateMainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi('mainPage.ui', self)
-
-
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('covid.ui', self)
         # self.setFixedSize(1006, 807)
-        self.show()
         self.loadBtn.clicked.connect(self.load)
         self.homeBtn.clicked.connect(self.home)
         # self.settingsBtn.clicked.connect(self.settings)
-        self.model = torch.hub.load('ultralytics/yolov5', 'custom',
-                                    path_or_model=f'{os.getcwd()}/best.pt', force_reload=True)
 
     def home(self):
-        uic.loadUi('covid.ui', self)
+        widget = MyWidget()
+        widget.show()
 
     def settings(self):
         pass
@@ -40,11 +32,15 @@ class MyWidget(QMainWindow):
         filenames = []
         if dialog.exec_():
             filenames = dialog.selectedFiles()
-        # TODO: check file type. If it is NIFTI, convert to PNG
-        self.analyze(filenames)
-        self.openResults(os.listdir('results'))
+        if len(filenames) != 0:
+            # TODO: check file type. If it is NIFTI, convert to PNG
+            self.analyze(filenames)
+            self.openResults(os.listdir('results'))
 
     def analyze(self, filenames):
+        print('LOADING MODEL:')
+        self.model = torch.hub.load('ultralytics/yolov5', 'custom',
+                                    path_or_model=f'{os.getcwd()}/best.pt')
         images = []
         for img in filenames:
             images.append(Image.open(img))
@@ -69,28 +65,37 @@ class MyWidget(QMainWindow):
         main = uic.loadUi('mainPage.ui', self)
         self.setMinimumSize(0, 0)
         self.setMaximumSize(16777215, 16777215)
+        main.homeButton.clicked.connect(self.home)
         main.show()
-        print('opened')
-        # self.close()
+
         for im in images:
             im_path = f'{os.getcwd()}/results/{im}'
             icon = QIcon(im_path)
+
+            font = QFont("Georgia")
+            font.bold()
+            font.setPointSize(30)
+
             text = ""
             if self.illness_check(im):
-                text = "Is ill"
+                text = "❌ Sick"
             else:
-                text = "is not ill"
-            item = QListWidgetItem(icon, text)
-            # size.setHeight(500)
-            # size.setWidth(500)
-            # item.setSizeHint(size)
-            # imageLabel = QLabel()
-            # imageLabel.setPixmap(QPixmap.fromImage(QImage(im)))
-            # is_ill = self.illness_check(im)
-            main.srollResults.addItem(item)
+                text = "✅ Healthy"
+
+            item = QListWidgetItem()
+            item.setIcon(icon)
+            item.setText(text)
+            item.setFont(font)
+
+            main.scrollResults.addItem(item)
+            main.scrollResults.setIconSize(QSize(200, 200))
 
 
-app = QApplication(sys.argv)
-ex = MyWidget()
-ex.show()
-sys.exit(app.exec_())
+try:
+    app = QApplication(sys.argv)
+    ex = MyWidget()
+    ex.show()
+    sys.exit(app.exec_())
+finally:
+    if os.path.exists('results'):
+        shutil.rmtree('results')

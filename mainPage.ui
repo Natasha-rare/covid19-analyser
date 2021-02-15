@@ -86,7 +86,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="homeBtn">
+    <widget class="QPushButton" name="homeButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -214,7 +214,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>Results:</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Results:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -304,7 +304,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="Pdf">
+      <widget class="QLabel" name="to_pdf_button">
        <property name="font">
         <font>
          <family>Arial</family>
@@ -320,7 +320,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="Save">
+      <widget class="QLabel" name="save_detected_button">
        <property name="font">
         <font>
          <family>Arial</family>
@@ -336,7 +336,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="Save_csv">
+      <widget class="QLabel" name="to_csv_button">
        <property name="font">
         <font>
          <family>Arial</family>
@@ -353,13 +353,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QListWidget" name="srollResults">
+   <widget class="QListWidget" name="scrollResults">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>170</x>
       <y>90</y>
-      <width>351</width>
-      <height>451</height>
+      <width>371</width>
+      <height>461</height>
      </rect>
     </property>
    </widget>
