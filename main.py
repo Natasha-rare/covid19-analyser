@@ -26,7 +26,7 @@ class MyWidget(QMainWindow):
         self.homeBtn.clicked.connect(self.home)
         # self.settingsBtn.clicked.connect(self.settings)
         self.model = torch.hub.load('ultralytics/yolov5', 'custom',
-                                    path_or_model=f'{os.getcwd()}/best.pt')
+                                    path_or_model=f'{os.getcwd()}/best.pt', force_reload=True)
 
     def home(self):
         uic.loadUi('covid.ui', self)
