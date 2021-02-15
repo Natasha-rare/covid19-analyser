@@ -24,8 +24,7 @@ class SessionWindow(QMainWindow):
 
     def home(self):
         print('HOME')
-        covid = uic.loadUi('covid.ui', self)
-        covid.show()
+        uic.loadUi('covid.ui', self)
 
     def analyze(self, filenames):
         images = []
