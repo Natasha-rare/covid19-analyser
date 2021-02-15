@@ -9,7 +9,6 @@ import os
 import torch
 import requests, cv2, tqdm, torchvision, yaml, matplotlib, pandas, seaborn
 
-
 class SessionWindow(QMainWindow):
     def __init__(self, filenames):
         super().__init__()
@@ -23,7 +22,8 @@ class SessionWindow(QMainWindow):
 
     def home(self):
         print('HOME')
-        uic.loadUi('covid.ui', self)
+        covid = uic.loadUi('covid.ui', self)
+        covid.show()
 
     def analyze(self, filenames):
         images = []
