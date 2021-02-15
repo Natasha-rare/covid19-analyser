@@ -2,12 +2,14 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QPixmap, QImage, QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem, \
+    QVBoxLayout, QHBoxLayout
 from PIL import Image
 import shutil
 import os
 import torch
 import requests, cv2, tqdm, torchvision, yaml, matplotlib, pandas, seaborn
+
 
 class SessionWindow(QMainWindow):
     def __init__(self, filenames):
@@ -17,7 +19,7 @@ class SessionWindow(QMainWindow):
         self.model = torch.hub.load('ultralytics/yolov5', 'custom',
                                     path_or_model=f'{os.getcwd()}/best.pt')
         self.analyze(filenames)
-        self.openResults(os.listdir('results'))
+
         self.homeBtn.clicked.connect(self.home)
 
     def home(self):
@@ -34,6 +36,7 @@ class SessionWindow(QMainWindow):
         if not os.path.exists('results'):
             os.mkdir('results')
         results.save()
+        self.openResults(os.listdir('results'))
 
     def illness_check(self, image_path):
         img = cv2.imread(f'{os.getcwd()}/results/{image_path}')
@@ -47,6 +50,10 @@ class SessionWindow(QMainWindow):
         return True  # if not grayscale
 
     def openResults(self, images):
+        main = uic.loadUi('mainPage.ui', self)
+        self.setMinimumSize(0, 0)
+        self.setMaximumSize(16777215, 16777215)
+        main.show()
         print('PASSED IMAGES', images)
         for im in images:
             im_path = f'{os.getcwd()}/results/{im}'
@@ -57,4 +64,8 @@ class SessionWindow(QMainWindow):
             else:
                 text = "is not ill"
             item = QListWidgetItem(icon, text)
-            self.srollResults.addItem(item)
+            size = QSize()
+            size.setHeight(256)
+            size.setWidth(256)
+            item.setSizeHint(size)
+            main.scrollResults.addItem(item)

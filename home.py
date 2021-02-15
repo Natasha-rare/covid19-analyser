@@ -25,5 +25,6 @@ class HomeWindow(QMainWindow):
         # TODO: check file type. If it is NIFTI, convert to PNG
         self.setMinimumSize(0, 0)
         self.setMaximumSize(16777215, 16777215)
-        uic.loadUi('mainPage.ui', self)
+        # uic.loadUi('mainPage.ui', self)
+        self.close()
         SessionWindow(filenames)
