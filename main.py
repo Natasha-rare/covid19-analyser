@@ -50,15 +50,14 @@ class MainWindow(QMainWindow):
             im_path = f'{os.getcwd()}/results{self.results_index}/{im}'
             icon = QIcon(im_path)
 
-            font = QFont("Georgia")
-            font.bold()
-            font.setPointSize(30)
+            font = QFont("Arial")
+            font.setPointSize(20)
 
             text = ""
             if self.illness_check(im):
                 text = "  ❌ Sick"
+                text = f"  ❌ Sick\n  {im}"
             else:
-                text = "  ✅ Healthy"
 
             item = QListWidgetItem()
             item.setIcon(icon)
@@ -108,5 +107,5 @@ try:
 finally:
     for folder in os.listdir(os.getcwd()):
         if 'results' in folder:
-            print('DELETED', folder, 'FOLDER')
+            print('DELETED', folder, 'FOLDER(S)')
             shutil.rmtree(folder)
