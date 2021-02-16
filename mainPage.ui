@@ -16,6 +16,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
@@ -290,7 +293,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>❌ End session</string>
+     <string/>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -361,6 +364,26 @@
       <width>371</width>
       <height>461</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="endBtn">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>410</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: (231, 231, 231);
+border: none;
+color: black;
+
+</string>
+    </property>
+    <property name="text">
+     <string>❌ End session</string>
     </property>
    </widget>
   </widget>

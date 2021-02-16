@@ -20,8 +20,12 @@ class MyWidget(QMainWindow):
         # self.settingsBtn.clicked.connect(self.settings)
 
     def home(self):
+        print("HOME CLICKED")
+        self.close()
+        uic.loadUi('covid.ui', self)
         widget = MyWidget()
         widget.show()
+        self.show()
 
     def settings(self):
         pass
@@ -63,9 +67,10 @@ class MyWidget(QMainWindow):
 
     def openResults(self, images):
         main = uic.loadUi('mainPage.ui', self)
-        self.setMinimumSize(0, 0)
-        self.setMaximumSize(16777215, 16777215)
+        self.setMinimumSize(800, 600)
+        self.setMaximumSize(800, 600)
         main.homeButton.clicked.connect(self.home)
+        main.endBtn.clicked.connect(self.home)
         main.show()
 
         for im in images:
