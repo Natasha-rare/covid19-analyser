@@ -19,12 +19,14 @@ class MainWindow(QMainWindow):
         self.results_index = results__dir_index
         self.images_list = []
         self.illness_list = []
+        self.saved = False
         uic.loadUi('mainPage.ui', self)
         self.analyze(filenames)
         self.openResults(os.listdir(f'results{self.results_index}'))
         self.setFixedSize(800, 600)
         self.setWindowTitle(f'Session {self.results_index}')
         self.to_csv_button.clicked.connect(self.to_csv)
+        self.save_detected_button.clicked.connect(self.saveResults)
 
     def analyze(self, filenames):
         print('LOADING MODEL:')
@@ -82,7 +84,31 @@ class MainWindow(QMainWindow):
         name = QFileDialog.getSaveFileName(self, caption='Save session as .csv',
                                            directory=f'{os.path.expanduser("~/Desktop")}/session{self.results_index}.csv',
                                            filter='*.csv')
-        df.to_csv(name[0])
+        if name[0] != '':
+            df.to_csv(name[0])
+
+    def saveResults(self):
+        dir_name = QFileDialog.getExistingDirectory(self, caption='Choose folder',
+                                                    directory=f'{os.path.expanduser("~/Desktop")}',
+                                                    options=QFileDialog.ShowDirsOnly)
+        if dir_name != "":
+            orig_path = f'{os.getcwd()}/results{self.results_index}'
+            new_path = f'{dir_name}/results{self.results_index}'
+            shutil.move(orig_path, new_path)
+            self.saved = True
+
+    def closeEvent(self, event):
+        if not self.saved:
+            reply = QMessageBox.question(self, 'Session End', 'You have unsaved detected images! \nDo you want to save '
+                                                              'them?',
+                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+
+            if reply == QMessageBox.No:
+                event.accept()
+            else:
+                self.saveResults()
+                event.accept()
+            print(f'Session{self.results_index} closed')
 
 
 class MyWidget(QMainWindow):
