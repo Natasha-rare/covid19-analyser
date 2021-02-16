@@ -2,23 +2,29 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QPixmap, QImage, QIcon, QFont
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem, \
+    QMessageBox
 from PIL import Image
 import shutil
 import os
 import torch
-import requests, cv2, tqdm, torchvision, yaml, matplotlib, pandas, seaborn
+import pandas as pd
+import time
+import requests, cv2, tqdm, torchvision, yaml, matplotlib, seaborn
 
 
 class MainWindow(QMainWindow):
     def __init__(self, filenames=None, results__dir_index=None, parent=None):
         super().__init__(parent)
         self.results_index = results__dir_index
+        self.images_list = []
+        self.illness_list = []
         uic.loadUi('mainPage.ui', self)
         self.analyze(filenames)
         self.openResults(os.listdir(f'results{self.results_index}'))
         self.setFixedSize(800, 600)
         self.setWindowTitle(f'Session {self.results_index}')
+        self.to_csv_button.clicked.connect(self.to_csv)
 
     def analyze(self, filenames):
         print('LOADING MODEL:')
@@ -45,7 +51,7 @@ class MainWindow(QMainWindow):
         return True  # if not grayscale
 
     def openResults(self, images):
-
+        self.images_list = images
         for im in images:
             im_path = f'{os.getcwd()}/results{self.results_index}/{im}'
             icon = QIcon(im_path)
@@ -56,8 +62,10 @@ class MainWindow(QMainWindow):
             text = ""
             if self.illness_check(im):
                 text = f"  ❌ Sick\n  {im}"
+                self.illness_list.append(1)
             else:
                 text = f"  ✅ Healthy\n  {im}"
+                self.illness_list.append(0)
 
             item = QListWidgetItem()
             item.setIcon(icon)
@@ -66,6 +74,15 @@ class MainWindow(QMainWindow):
 
             self.scrollResults.addItem(item)
             self.scrollResults.setIconSize(QSize(250, 250))
+
+    def to_csv(self):
+        df = pd.DataFrame(list(zip(self.images_list, self.illness_list)),
+                          columns=['File', 'Covid'])
+        # TODO: test saving on Windows
+        name = QFileDialog.getSaveFileName(self, caption='Save session as .csv',
+                                           directory=f'{os.path.expanduser("~/Desktop")}/session{self.results_index}.csv',
+                                           filter='*.csv')
+        df.to_csv(name[0])
 
 
 class MyWidget(QMainWindow):

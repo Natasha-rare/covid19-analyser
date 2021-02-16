@@ -98,56 +98,73 @@
      <rect>
       <x>570</x>
       <y>260</y>
-      <width>181</width>
+      <width>232</width>
       <height>141</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="to_pdf_button">
+      <widget class="QPushButton" name="to_pdf_button">
        <property name="font">
         <font>
          <family>Arial</family>
          <pointsize>18</pointsize>
         </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
        </property>
        <property name="text">
         <string>Generate PDF report</string>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="save_detected_button">
+      <widget class="QPushButton" name="save_detected_button">
        <property name="font">
         <font>
          <family>Arial</family>
          <pointsize>18</pointsize>
         </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
        </property>
        <property name="text">
         <string>Save detected images</string>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="to_csv_button">
+      <widget class="QPushButton" name="to_csv_button">
        <property name="font">
         <font>
          <family>Arial</family>
          <pointsize>18</pointsize>
+         <strikeout>false</strikeout>
+         <kerning>true</kerning>
         </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
        </property>
        <property name="styleSheet">
         <string notr="true"/>
        </property>
        <property name="text">
         <string>Save results as .csv</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
