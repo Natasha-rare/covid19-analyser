@@ -9,9 +9,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>837</width>
+    <height>594</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>837</width>
+    <height>594</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>837</width>
+    <height>594</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Session</string>
@@ -22,7 +34,7 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>141</width>
+      <width>201</width>
       <height>61</height>
      </rect>
     </property>
@@ -58,8 +70,8 @@
    <widget class="QLabel" name="image">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>10</y>
+      <x>580</x>
+      <y>80</y>
       <width>221</width>
       <height>181</height>
      </rect>
@@ -74,8 +86,8 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>200</y>
+      <x>590</x>
+      <y>270</y>
       <width>211</width>
       <height>51</height>
      </rect>
@@ -90,15 +102,15 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>Actions:</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Actions:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>260</y>
-      <width>232</width>
+      <y>340</y>
+      <width>248</width>
       <height>141</height>
      </rect>
     </property>
@@ -186,8 +198,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>24</height>
+     <width>837</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>

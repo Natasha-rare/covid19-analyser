@@ -1,5 +1,7 @@
 import sys
-from PyQt5 import uic
+
+import PyQt5
+from PyQt5 import uic, QtCore
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QPixmap, QImage, QIcon, QFont
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem, \
@@ -12,6 +14,12 @@ import pandas as pd
 import time
 import requests, cv2, tqdm, torchvision, yaml, matplotlib, seaborn
 
+if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
+    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+
+if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+
 
 class MainWindow(QMainWindow):
     def __init__(self, filenames=None, results__dir_index=None, parent=None):
@@ -23,7 +31,6 @@ class MainWindow(QMainWindow):
         uic.loadUi('mainPage.ui', self)
         self.analyze(filenames)
         self.openResults(os.listdir(f'results{self.results_index}'))
-        self.setFixedSize(800, 600)
         self.setWindowTitle(f'Session {self.results_index}')
         self.to_csv_button.clicked.connect(self.to_csv)
         self.save_detected_button.clicked.connect(self.saveResults)
@@ -115,7 +122,7 @@ class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('covid.ui', self)
-        self.setFixedSize(653, 406)
+
         self.loadBtn.clicked.connect(self.load)
         self.homeBtn.clicked.connect(self.home)
         self.results_index = 1
