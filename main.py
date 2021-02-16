@@ -55,9 +55,9 @@ class MainWindow(QMainWindow):
 
             text = ""
             if self.illness_check(im):
-                text = "  ❌ Sick"
                 text = f"  ❌ Sick\n  {im}"
             else:
+                text = f"  ✅ Healthy\n  {im}"
 
             item = QListWidgetItem()
             item.setIcon(icon)
@@ -107,5 +107,5 @@ try:
 finally:
     for folder in os.listdir(os.getcwd()):
         if 'results' in folder:
-            print('DELETED', folder, 'FOLDER(S)')
+            print('DELETED', folder, 'FOLDER')
             shutil.rmtree(folder)
