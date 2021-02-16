@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Session</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="results">

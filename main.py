@@ -11,12 +11,14 @@ import requests, cv2, tqdm, torchvision, yaml, matplotlib, pandas, seaborn
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, filenames=None, parent=None):
+    def __init__(self, filenames=None, results__dir_index=None, parent=None):
         super().__init__(parent)
+        self.results_index = results__dir_index
         uic.loadUi('mainPage.ui', self)
         self.analyze(filenames)
-        self.openResults(os.listdir('results'))
+        self.openResults(os.listdir(f'results{self.results_index}'))
         self.setFixedSize(800, 600)
+        self.setWindowTitle(f'Session {self.results_index}')
 
     def analyze(self, filenames):
         print('LOADING MODEL:')
@@ -27,12 +29,12 @@ class MainWindow(QMainWindow):
             images.append(Image.open(img))
         results = self.model(images, size=256)
         results.print()
-        if not os.path.exists('results'):
-            os.mkdir('results')
-        results.save()
+        if not os.path.exists(f'results{self.results_index}'):
+            os.mkdir(f'results{self.results_index}')
+        results.save(f'results{self.results_index}')
 
     def illness_check(self, image_path):
-        img = cv2.imread(f'{os.getcwd()}/results/{image_path}')
+        img = cv2.imread(f'{os.getcwd()}/results{self.results_index}/{image_path}')
         if len(img.shape) < 3:
             return False
         if img.shape[2] == 1:
@@ -45,7 +47,7 @@ class MainWindow(QMainWindow):
     def openResults(self, images):
 
         for im in images:
-            im_path = f'{os.getcwd()}/results/{im}'
+            im_path = f'{os.getcwd()}/results{self.results_index}/{im}'
             icon = QIcon(im_path)
 
             font = QFont("Georgia")
@@ -54,9 +56,9 @@ class MainWindow(QMainWindow):
 
             text = ""
             if self.illness_check(im):
-                text = "❌ Sick"
+                text = "  ❌ Sick"
             else:
-                text = "✅ Healthy"
+                text = "  ✅ Healthy"
 
             item = QListWidgetItem()
             item.setIcon(icon)
@@ -64,7 +66,7 @@ class MainWindow(QMainWindow):
             item.setFont(font)
 
             self.scrollResults.addItem(item)
-            self.scrollResults.setIconSize(QSize(200, 200))
+            self.scrollResults.setIconSize(QSize(250, 250))
 
 
 class MyWidget(QMainWindow):
@@ -74,6 +76,7 @@ class MyWidget(QMainWindow):
         self.setFixedSize(653, 406)
         self.loadBtn.clicked.connect(self.load)
         self.homeBtn.clicked.connect(self.home)
+        self.results_index = 1
         # self.settingsBtn.clicked.connect(self.settings)
 
     def settings(self):
@@ -92,9 +95,9 @@ class MyWidget(QMainWindow):
             filenames = dialog.selectedFiles()
         if len(filenames) != 0:
             # TODO: check file type. If it is NIFTI, convert to PNG
-
-            m = MainWindow(filenames=filenames, parent=self)
+            m = MainWindow(filenames=filenames, parent=self, results__dir_index=self.results_index)
             m.show()
+            self.results_index += 1
 
 
 try:
@@ -103,5 +106,7 @@ try:
     ex.show()
     sys.exit(app.exec_())
 finally:
-    if os.path.exists('results'):
-        shutil.rmtree('results')
+    for folder in os.listdir(os.getcwd()):
+        if 'results' in folder:
+            print('DELETED', folder, 'FOLDER')
+            shutil.rmtree(folder)
