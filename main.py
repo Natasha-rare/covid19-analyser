@@ -16,6 +16,7 @@ class MainWindow(QMainWindow):
         uic.loadUi('mainPage.ui', self)
         self.analyze(filenames)
         self.openResults(os.listdir('results'))
+        self.setFixedSize(800, 600)
 
     def analyze(self, filenames):
         print('LOADING MODEL:')
@@ -70,7 +71,7 @@ class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('covid.ui', self)
-        # self.setFixedSize(1006, 807)
+        self.setFixedSize(653, 406)
         self.loadBtn.clicked.connect(self.load)
         self.homeBtn.clicked.connect(self.home)
         # self.settingsBtn.clicked.connect(self.settings)
@@ -91,8 +92,7 @@ class MyWidget(QMainWindow):
             filenames = dialog.selectedFiles()
         if len(filenames) != 0:
             # TODO: check file type. If it is NIFTI, convert to PNG
-            self.setMinimumSize(0, 0)
-            self.setMaximumSize(16777215, 16777215)
+
             m = MainWindow(filenames=filenames, parent=self)
             m.show()
 
