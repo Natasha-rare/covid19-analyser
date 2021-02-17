@@ -9,3 +9,4 @@ torchvision
 PyYAML
 matplotlib
 seaborn
+py2app
