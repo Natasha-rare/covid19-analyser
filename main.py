@@ -1,24 +1,37 @@
+import os
+import shutil
 import sys
 
 import PyQt5
+import cv2
+import pandas as pd
+import torch
+from PIL import Image
 from PyQt5 import uic, QtCore
 from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QPixmap, QImage, QIcon, QFont
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QLabel, QListWidget, QListWidgetItem, \
+from PyQt5.QtGui import QIcon, QFont
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QListWidgetItem, \
     QMessageBox
-from PIL import Image
-import shutil
-import os
-import torch
-import pandas as pd
-import time
-import requests, cv2, tqdm, torchvision, yaml, matplotlib, seaborn
 
 if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 
 if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+
+if getattr(sys, 'frozen', False):
+    # If the application is run as a bundle, the PyInstaller bootloader
+    # extends the sys module by a flag frozen=True and sets the app
+    # path into variable _MEIPASS'.
+    application_path = sys._MEIPASS
+else:
+    application_path = os.path.dirname(os.path.abspath(__file__))
+
+
+def get_path(file=None):
+    if file is not None:
+        return os.path.join(application_path, file)
+    return application_path
 
 
 class MainWindow(QMainWindow):
@@ -28,9 +41,9 @@ class MainWindow(QMainWindow):
         self.images_list = []
         self.illness_list = []
         self.saved = False
-        uic.loadUi('mainPage.ui', self)
+        uic.loadUi(get_path('mainPage.ui'), self)
         self.analyze(filenames)
-        self.openResults(os.listdir(f'results{self.results_index}'))
+        self.openResults(os.listdir(get_path(f'results{self.results_index}')))
         self.setWindowTitle(f'Session {self.results_index}')
         self.to_csv_button.clicked.connect(self.to_csv)
         self.save_detected_button.clicked.connect(self.saveResults)
@@ -41,18 +54,18 @@ class MainWindow(QMainWindow):
         # {your python.exe path} -m pip install torch==1.7.1+cpu
         # torchvision==0.8.2+cpu to rchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
         self.model = torch.hub.load('ultralytics/yolov5', 'custom',
-                                    path_or_model=f'{os.getcwd()}/best.pt')
+                                    path_or_model=get_path('best.pt'))
         images = []
         for img in filenames:
             images.append(Image.open(img))
         results = self.model(images, size=256)
         results.print()
-        if not os.path.exists(f'results{self.results_index}'):
-            os.mkdir(f'results{self.results_index}')
-        results.save(f'results{self.results_index}')
+        if not os.path.exists(get_path(f'results{self.results_index}')):
+            os.mkdir(get_path(f'results{self.results_index}'))
+        results.save(get_path(f'results{self.results_index}'))
 
     def illness_check(self, image_path):
-        img = cv2.imread(f'{os.getcwd()}/results{self.results_index}/{image_path}')
+        img = cv2.imread(f'{get_path()}/results{self.results_index}/{image_path}')
         if len(img.shape) < 3:
             return False
         if img.shape[2] == 1:
@@ -65,7 +78,7 @@ class MainWindow(QMainWindow):
     def openResults(self, images):
         self.images_list = images
         for im in images:
-            im_path = f'{os.getcwd()}/results{self.results_index}/{im}'
+            im_path = f'{get_path()}/results{self.results_index}/{im}'
             icon = QIcon(im_path)
 
             font = QFont("Arial")
@@ -102,7 +115,7 @@ class MainWindow(QMainWindow):
                                                     directory=f'{os.path.expanduser("~/Desktop")}',
                                                     options=QFileDialog.ShowDirsOnly)
         if dir_name != "":
-            orig_path = f'{os.getcwd()}/results{self.results_index}'
+            orig_path = f'{get_path()}/results{self.results_index}'
             new_path = f'{dir_name}/results{self.results_index}'
             shutil.move(orig_path, new_path)
             self.saved = True
@@ -124,7 +137,8 @@ class MainWindow(QMainWindow):
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('covid.ui', self)
+        print(application_path)
+        uic.loadUi(get_path('covid.ui'), self)
 
         self.loadBtn.clicked.connect(self.load)
         self.homeBtn.clicked.connect(self.home)
@@ -158,7 +172,7 @@ try:
     ex.show()
     sys.exit(app.exec_())
 finally:
-    for folder in os.listdir(os.getcwd()):
+    for folder in os.listdir(get_path()):
         if 'results' in folder:
+            shutil.rmtree(get_path(folder))
             print('DELETED', folder, 'FOLDER')
-            shutil.rmtree(folder)
