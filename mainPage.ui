@@ -116,22 +116,6 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="to_pdf_button">
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>18</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Generate PDF report</string>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="save_detected_button">
        <property name="font">
         <font>
@@ -199,7 +183,7 @@
      <x>0</x>
      <y>0</y>
      <width>837</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
