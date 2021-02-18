@@ -19,13 +19,14 @@ if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
 if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
-if getattr(sys, 'frozen', False):
-    # If the application is run as a bundle, the PyInstaller bootloader
-    # extends the sys module by a flag frozen=True and sets the app
-    # path into variable _MEIPASS'.
-    application_path = sys._MEIPASS
-else:
-    application_path = os.path.dirname(os.path.abspath(__file__))
+# if not getattr(sys, 'frozen', False):
+#     application_path = os.path.dirname(os.path.abspath(__file__))
+# else:
+#     # If the application is run as a bundle, the PyInstaller bootloader
+#     # extends the sys module by a flag frozen=True and sets the app
+#     # path into variable _MEIPASS'.
+#     application_path = sys._MEIPASS
+application_path = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_path(file=None):
@@ -51,7 +52,8 @@ class MainWindow(QMainWindow):
     def analyze(self, filenames):
         print('LOADING MODEL:')
         # NOTE! If model does not work, try this (Windows ONLY!!!!!)
-        # {your python.exe path} -m pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+        # {your python.exe path} -m pip install torch==1.7.1+cpu
+        # torchvision==0.8.2+cpu torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
         self.model = torch.hub.load('ultralytics/yolov5', 'custom',
                                     path_or_model=get_path('best.pt'))
         images = []
@@ -136,7 +138,6 @@ class MainWindow(QMainWindow):
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        print(application_path)
         uic.loadUi(get_path('covid.ui'), self)
 
         self.loadBtn.clicked.connect(self.load)
