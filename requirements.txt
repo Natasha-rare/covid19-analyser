@@ -10,3 +10,4 @@ PyYAML
 matplotlib
 seaborn
 py2app
+py2exe
