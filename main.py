@@ -51,8 +51,7 @@ class MainWindow(QMainWindow):
     def analyze(self, filenames):
         print('LOADING MODEL:')
         # NOTE! If model does not work, try this (Windows ONLY!!!!!)
-        # {your python.exe path} -m pip install torch==1.7.1+cpu
-        # torchvision==0.8.2+cpu to rchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+        # {your python.exe path} -m pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
         self.model = torch.hub.load('ultralytics/yolov5', 'custom',
                                     path_or_model=get_path('best.pt'))
         images = []
