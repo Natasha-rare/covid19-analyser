@@ -13,7 +13,7 @@ Windows:
 ``` bash
 venv\Scripts\activate
 ```
-Mac/Linux:
+Mac:
 ``` bash
 source venv/bin/activate
 ```
