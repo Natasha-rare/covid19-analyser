@@ -11,7 +11,7 @@ from PyQt5 import uic, QtCore
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QListWidgetItem, \
-    QMessageBox
+    QMessageBox, QLabel
 
 if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
@@ -33,6 +33,17 @@ def get_path(file=None):
     if file is not None:
         return os.path.join(application_path, file)
     return application_path
+
+
+class Settings(QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        uic.loadUi(get_path('settings.ui'), self)
+        print('settings')
+        self.homeBtn.clicked.connect(self.home)
+
+    def home(self):
+        self.close()
 
 
 class MainWindow(QMainWindow):
@@ -151,7 +162,7 @@ class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi(get_path('covid.ui'), self)
-
+        self.settingsBtn.clicked.connect(self.settings)
         self.loadBtn.clicked.connect(self.load)
         self.homeBtn.clicked.connect(self.home)
         self.recentBtn.clicked.connect(self.recent)
@@ -159,7 +170,9 @@ class MyWidget(QMainWindow):
         # self.settingsBtn.clicked.connect(self.settings)
 
     def settings(self):
-        pass
+        settings = Settings(parent=self)
+        settings.show()
+
 
     def home(self):
         print("HOME")
