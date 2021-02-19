@@ -148,14 +148,16 @@ class MainWindow(QMainWindow):
         if not self.saved:
             reply = QMessageBox.question(self, 'Session End', 'You have unsaved detected images! \nDo you want to save '
                                                               'them?',
-                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+                                         QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.Yes)
 
             if reply == QMessageBox.No:
                 event.accept()
-            else:
+            elif reply == QMessageBox.Yes:
                 self.saveResults()
                 event.accept()
-            print(f'Session{self.results_index} closed')
+                print(f'Session{self.results_index} closed')
+            else:
+                event.ignore()
 
 
 class MyWidget(QMainWindow):
@@ -172,7 +174,6 @@ class MyWidget(QMainWindow):
     def settings(self):
         settings = Settings(parent=self)
         settings.show()
-
 
     def home(self):
         print("HOME")
@@ -209,9 +210,6 @@ class MyWidget(QMainWindow):
                 m = MainWindow(parent=self, results__dir_index=self.results_index, recent_path=recent_path)
                 m.show()
                 self.results_index += 1
-
-
-
 
 
 try:

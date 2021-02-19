@@ -166,7 +166,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="settingsBtn">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -485,7 +485,7 @@ border-radius: 20
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
