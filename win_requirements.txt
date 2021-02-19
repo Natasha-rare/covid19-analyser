@@ -1,13 +1,9 @@
 PyQt5
 Pillow
-torch
 pandas
 requests
 opencv-python
 tqdm
-torchvision
 PyYAML
 matplotlib
 seaborn
-py2app
-py2exe
