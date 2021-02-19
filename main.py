@@ -36,18 +36,21 @@ def get_path(file=None):
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, filenames=None, results__dir_index=None, parent=None):
+    def __init__(self, filenames=None, results__dir_index=None, parent=None, recent_path: str = None):
         super().__init__(parent)
         self.results_index = results__dir_index
         self.images_list = []
         self.illness_list = []
         self.saved = False
         uic.loadUi(get_path('mainPage.ui'), self)
-        self.analyze(filenames)
-        self.openResults(os.listdir(get_path(f'results{self.results_index}')))
+        if recent_path is None:
+            self.analyze(filenames)
+            self.openResults(os.listdir(get_path(f'results{self.results_index}')))
+            self.save_detected_button.clicked.connect(self.saveResults)
+        else:
+            self.openResults(os.listdir(recent_path), recent_path)
         self.setWindowTitle(f'Session {self.results_index}')
         self.to_csv_button.clicked.connect(self.to_csv)
-        self.save_detected_button.clicked.connect(self.saveResults)
 
     def analyze(self, filenames):
         print('LOADING MODEL:')
@@ -66,7 +69,7 @@ class MainWindow(QMainWindow):
         results.save(get_path(f'results{self.results_index}'))
 
     def illness_check(self, image_path):
-        img = cv2.imread(f'{get_path()}/results{self.results_index}/{image_path}')
+        img = cv2.imread(image_path)
         if len(img.shape) < 3:
             return False
         if img.shape[2] == 1:
@@ -76,17 +79,24 @@ class MainWindow(QMainWindow):
             return False
         return True  # if not grayscale
 
-    def openResults(self, images):
+    def openResults(self, images, recent_path=None):
         self.images_list = images
+
+        if recent_path is not None:
+            path = recent_path
+            self.saved = True
+        else:
+            path = os.path.join(get_path(), f'results{self.results_index}')
+
         for im in images:
-            im_path = f'{get_path()}/results{self.results_index}/{im}'
+            im_path = os.path.join(path, im)
             icon = QIcon(im_path)
 
             font = QFont("Arial")
             font.setPointSize(20)
 
             text = ""
-            if self.illness_check(im):
+            if self.illness_check(im_path):
                 text = f"  ❌ Sick\n  {im}"
                 self.illness_list.append(1)
             else:
@@ -104,7 +114,6 @@ class MainWindow(QMainWindow):
     def to_csv(self):
         df = pd.DataFrame(list(zip(self.images_list, self.illness_list)),
                           columns=['File', 'Covid'])
-        # TODO: test saving on Windows
         name = QFileDialog.getSaveFileName(self, caption='Save session as .csv',
                                            directory=f'{os.path.expanduser("~/Desktop")}/session{self.results_index}.csv',
                                            filter='*.csv')
@@ -119,6 +128,9 @@ class MainWindow(QMainWindow):
             orig_path = f'{get_path()}/results{self.results_index}'
             new_path = f'{dir_name}/results{self.results_index}'
             shutil.move(orig_path, new_path)
+            f = open(get_path('cache.txt'), 'w')
+            f.write(new_path)
+            f.close()
             self.saved = True
 
     def closeEvent(self, event):
@@ -142,6 +154,7 @@ class MyWidget(QMainWindow):
 
         self.loadBtn.clicked.connect(self.load)
         self.homeBtn.clicked.connect(self.home)
+        self.recentBtn.clicked.connect(self.recent)
         self.results_index = 1
         # self.settingsBtn.clicked.connect(self.settings)
 
@@ -164,6 +177,28 @@ class MyWidget(QMainWindow):
             m = MainWindow(filenames=filenames, parent=self, results__dir_index=self.results_index)
             m.show()
             self.results_index += 1
+
+    def recent(self):
+        recent_path = None
+        if not os.path.exists(get_path('cache.txt')):
+            alert = QMessageBox()
+            alert.setText("You haven't saved any images yet.")
+            alert.exec_()
+        else:
+            f = open(get_path('cache.txt'), 'r')
+            recent_path = f.read()
+            f.close()
+            if not os.path.exists(recent_path):
+                alert = QMessageBox()
+                alert.setText(f"Nothing found at:\n\n{recent_path}\n\nImages may be moved or deleted.")
+                alert.exec_()
+            else:
+                m = MainWindow(parent=self, results__dir_index=self.results_index, recent_path=recent_path)
+                m.show()
+                self.results_index += 1
+
+
+
 
 
 try:
