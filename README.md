@@ -13,7 +13,7 @@ Windows:
 ``` bash
 venv\Scripts\activate
 ```
-Mac:
+Mac/Linux:
 ``` bash
 source venv/bin/activate
 ```
@@ -25,7 +25,7 @@ pip3 install -r win_requirements.txt
 ``` bash
 python -m pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 ```
-Mac:
+Mac/Linux:
 ``` bash
 pip3 install -r mac_requirements.txt
 ```
