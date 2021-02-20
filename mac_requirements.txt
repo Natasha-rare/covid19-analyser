@@ -9,3 +9,5 @@ torchvision
 PyYAML
 matplotlib
 seaborn
+nibabel
+imageio

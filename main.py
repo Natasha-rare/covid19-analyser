@@ -12,6 +12,7 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QListWidgetItem, \
     QMessageBox, QLabel
+from nii2png import convert_slice
 
 if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
@@ -92,6 +93,9 @@ class MainWindow(QMainWindow):
 
     def openResults(self, images, recent_path=None):
         self.images_list = images
+
+        if os.path.exists(get_path('nii')):
+            shutil.rmtree(get_path('nii'))
 
         if recent_path is not None:
             path = recent_path
@@ -184,11 +188,22 @@ class MyWidget(QMainWindow):
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.ExistingFiles)
         filenames = []
+        nii_filenames = []
+        files = []
         if dialog.exec_():
-            filenames = dialog.selectedFiles()
-        if len(filenames) != 0:
+            files = dialog.selectedFiles()
+        if len(files) != 0:
             # TODO: check file type. If it is NIFTI, convert to PNG
-            m = MainWindow(filenames=filenames, parent=self, results__dir_index=self.results_index)
+            for file in files:
+                if os.path.splitext(file)[1] == '.nii':
+                    convert_slice(file, 'nii', 20)
+                else:
+                    filenames.append(file)
+            for file in os.listdir(os.path.join(get_path(), 'nii')):
+                nii_filenames.append(os.path.join(get_path(), 'nii', file))
+            print(filenames)
+            print(nii_filenames)
+            m = MainWindow(filenames=filenames + nii_filenames, parent=self, results__dir_index=self.results_index)
             m.show()
             self.results_index += 1
 
