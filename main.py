@@ -199,8 +199,9 @@ class MyWidget(QMainWindow):
                     convert_slice(file, 'nii', 20)
                 else:
                     filenames.append(file)
-            for file in os.listdir(os.path.join(get_path(), 'nii')):
-                nii_filenames.append(os.path.join(get_path(), 'nii', file))
+            if os.path.exists(os.path.join(get_path(), 'nii')):
+                for file in os.listdir(os.path.join(get_path(), 'nii')):
+                    nii_filenames.append(os.path.join(get_path(), 'nii', file))
             print(filenames)
             print(nii_filenames)
             m = MainWindow(filenames=filenames + nii_filenames, parent=self, results__dir_index=self.results_index)
