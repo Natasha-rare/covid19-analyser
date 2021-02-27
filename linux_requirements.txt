@@ -1,0 +1,13 @@
+PyQt5
+Pillow
+torch
+pandas
+requests
+opencv-python-headless
+tqdm
+torchvision
+PyYAML
+matplotlib
+seaborn
+nibabel
+imageio
