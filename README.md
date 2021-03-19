@@ -1,5 +1,12 @@
 # COVID-19 Analyzer
-## Usage:
+# Sceenshots:
+### Windows  
+![Windows](https://i.imgur.com/eZYfdvW.png)  
+### Mac  
+![Mac](https://i.imgur.com/1CJGxiq.png)  
+### Linux  
+![Linux](https://i.imgur.com/s7nm2bS.png)  
+# Usage:
 ### Download the app  
 
 ### Open it in Terminal (or command line)  
