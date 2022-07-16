@@ -1,5 +1,7 @@
 # COVID-19 Analyzer
-# Sceenshots:
+Identify COVID-19 in photos of lungs. Built with PyQt, YOLOv5, Python3. This project was made for the Moscow Programming Olympiad final.
+# Video (watch it!): https://youtu.be/Vdvi8eIfBSk
+# Screenshots:
 ### Windows  
 ![Windows](https://i.imgur.com/eZYfdvW.png)  
 ### Mac  
